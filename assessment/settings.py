@@ -133,7 +133,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'recruiter.User'
+AUTH_USER_MODEL = 'ramognee.User'
 
 SIMPLE_JWT = {
 

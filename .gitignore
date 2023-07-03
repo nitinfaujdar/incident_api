@@ -1,2 +1,13 @@
 vir_dir/
 .env/
+assessment/.env
+ramognee/__pycache__/admin.cpython-38.pyc
+ramognee/__pycache__/apps.cpython-38.pyc
+ramognee/__pycache__/models.cpython-38.pyc
+ramognee/migrations/__pycache__/__init__.cpython-38.pyc
+ramognee/migrations/__pycache__/0001_initial.cpython-38.pyc
+ramognee/__pycache__/__init__.cpython-38.pyc
+assessment/__pycache__/__init__.cpython-38.pyc
+assessment/__pycache__/settings.cpython-38.pyc
+assessment/__pycache__/urls.cpython-38.pyc
+assessment/__pycache__/wsgi.cpython-38.pyc
