@@ -6,7 +6,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 import random as r
-import datetime
+from django.utils import timezone
 from .models import *
 from .serializers import *
 
@@ -79,11 +79,14 @@ class ProfileView(generics.ListAPIView):
         return Response({"message": "Profile fetched Successfully", "data": serializer.data}, status=status.HTTP_200_OK)
     
 def generate_incident_id():
-        id="RMG"
-        for i in range(5):
-            id+=str(r.randint(1,9))
-        return id + str(datetime.datetime.now().year)
-
+    current_year = timezone.now().year
+    next_value = Incident.objects.aggregate(models.Max('incident_id'))['incident_id__max']
+    if next_value:
+        next_value = int(next_value.split('-')[1]) + 1
+    else:
+        next_value = 1
+    return f'RMG-{str(next_value).zfill(5)}-{current_year}'
+    
 class IncidentView(generics.GenericAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -104,7 +107,7 @@ class IncidentView(generics.GenericAPIView):
     
     def patch(self, request):
         try:
-            obj = Incident.objects.get(id = request.data['id'])
+            obj = Incident.objects.get(incident_id = request.data['id'])
         except Incident.DoesNotExist:
             raise serializers.ValidationError({
                   "error_message": "Invalid Incident ID supplied!.."
